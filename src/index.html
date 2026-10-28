@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nexova Selection Operations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body { font-family: "DM Sans", sans-serif; }
+      code, pre, .mono { font-family: "IBM Plex Mono", monospace; }
+      button, input, select { font: inherit; }
+    </style>
+  </head>
+  <body class="min-h-screen bg-[#f2f5f1] text-[#182b25]">
+    <header class="border-b border-[#d6dfd8] bg-white">
+      <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-5 lg:px-8">
+        <div class="flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-md bg-[#174f3b] text-sm font-bold text-white">N</div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[#527264]">Nexova / Talent</p>
+            <h1 class="text-lg font-semibold">Selection operations</h1>
+          </div>
+        </div>
+        <div class="text-right">
+          <p class="text-xs uppercase text-[#6c8076]">Sample candidates</p>
+          <p id="candidate-count" class="mono text-lg font-medium">0</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto grid max-w-7xl gap-6 px-5 py-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:px-8">
+      <section class="space-y-5" aria-label="Candidate operations">
+        <div class="border-b border-[#cbd8d0] pb-3">
+          <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[#527264]">Candidate tools</p>
+          <h2 class="mt-1 text-xl font-semibold">Run an operation</h2>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          <button id="rank-candidates" class="rounded bg-[#174f3b] px-4 py-2 text-sm font-semibold text-white hover:bg-[#103d2d]">Rank for vacancy</button>
+          <button id="show-reports" class="rounded border border-[#174f3b] px-4 py-2 text-sm font-semibold text-[#174f3b] hover:bg-[#e8f0eb]">Generate reports</button>
+          <button id="validate-samples" class="rounded border border-[#bdcbc2] bg-white px-4 py-2 text-sm font-semibold hover:border-[#174f3b]">Validate sample data</button>
+        </div>
+
+        <div class="border-t border-[#cbd8d0] pt-4">
+          <h3 class="mb-3 text-sm font-semibold">Filter candidates</h3>
+        </div>
+
+        <div class="grid gap-3 sm:grid-cols-2">
+          <label class="text-sm font-medium">Required skills
+            <input id="skills-query" value="TypeScript, React" class="mt-1.5 w-full rounded border border-[#bdcbc2] bg-white px-3 py-2 text-sm outline-none focus:border-[#174f3b] focus:ring-2 focus:ring-[#174f3b]/15" />
+          </label>
+          <div class="flex items-end">
+            <button id="filter-skills" class="w-full rounded bg-[#174f3b] px-3 py-2 text-sm font-semibold text-white hover:bg-[#103d2d]">Filter by all skills</button>
+          </div>
+
+          <label class="text-sm font-medium">Seniority
+            <select id="seniority-query" class="mt-1.5 w-full rounded border border-[#bdcbc2] bg-white px-3 py-2 text-sm">
+              <option>Junior</option><option>Semi-Senior</option><option selected>Senior</option><option>Lead</option><option>Executive</option>
+            </select>
+          </label>
+          <div class="flex items-end">
+            <button id="filter-seniority" class="w-full rounded border border-[#174f3b] px-3 py-2 text-sm font-semibold text-[#174f3b] hover:bg-[#e8f0eb]">Filter seniority</button>
+          </div>
+
+          <label class="text-sm font-medium">Minimum experience
+            <input id="experience-min" type="number" min="0" value="4" class="mt-1.5 w-full rounded border border-[#bdcbc2] bg-white px-3 py-2 text-sm" />
+          </label>
+          <div class="flex items-end gap-2">
+            <label class="min-w-0 flex-1 text-sm font-medium">Maximum
+              <input id="experience-max" type="number" min="0" value="8" class="mt-1.5 w-full rounded border border-[#bdcbc2] bg-white px-3 py-2 text-sm" />
+            </label>
+            <button id="filter-experience" class="rounded border border-[#174f3b] px-3 py-2 text-sm font-semibold text-[#174f3b] hover:bg-[#e8f0eb]">Filter</button>
+          </div>
+
+          <label class="text-sm font-medium sm:col-span-2">Availability
+            <select id="availability-query" multiple size="4" class="mt-1.5 w-full rounded border border-[#bdcbc2] bg-white px-3 py-2 text-sm">
+              <option value="Immediate" selected>Immediate</option><option value="2 weeks" selected>2 weeks</option><option value="1 month" selected>1 month</option><option value="Not available">Not available</option>
+            </select>
+          </label>
+          <button id="filter-availability" class="rounded border border-[#174f3b] px-3 py-2 text-sm font-semibold text-[#174f3b] hover:bg-[#e8f0eb] sm:col-span-2">Filter availability</button>
+        </div>
+
+        <div class="border-t border-[#cbd8d0] pt-4">
+          <h3 class="mb-3 text-sm font-semibold">Sort candidates</h3>
+          <div class="grid grid-cols-2 gap-2">
+            <button id="sort-salary-asc" class="rounded border border-[#bdcbc2] bg-white px-3 py-2 text-sm hover:border-[#174f3b]">Salary: low to high</button>
+            <button id="sort-salary-desc" class="rounded border border-[#bdcbc2] bg-white px-3 py-2 text-sm hover:border-[#174f3b]">Salary: high to low</button>
+            <button id="sort-experience-asc" class="rounded border border-[#bdcbc2] bg-white px-3 py-2 text-sm hover:border-[#174f3b]">Experience: low to high</button>
+            <button id="sort-experience-desc" class="rounded border border-[#bdcbc2] bg-white px-3 py-2 text-sm hover:border-[#174f3b]">Experience: high to low</button>
+          </div>
+        </div>
+
+        <div class="border-t border-[#cbd8d0] pt-4">
+          <h3 class="mb-3 text-sm font-semibold">Find a candidate</h3>
+          <div class="grid gap-2 sm:grid-cols-[9rem_1fr_auto]">
+            <select id="search-type" class="rounded border border-[#bdcbc2] bg-white px-3 py-2 text-sm">
+              <option value="id">By ID</option><option value="email">By email</option><option value="salary">By salary</option>
+            </select>
+            <input id="search-query" placeholder="ID, email, or salary" class="min-w-0 rounded border border-[#bdcbc2] bg-white px-3 py-2 text-sm outline-none focus:border-[#174f3b]" />
+            <button id="search-candidate" class="rounded bg-[#d66b3d] px-4 py-2 text-sm font-semibold text-white hover:bg-[#b95027]">Search</button>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="min-w-0" aria-label="Operation results">
+        <div class="flex items-end justify-between border-b border-[#cbd8d0] pb-3">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[#527264]">Live output</p>
+            <h2 class="mt-1 text-xl font-semibold">Operation results</h2>
+          </div>
+          <span class="mono text-xs text-[#6c8076]">JSON</span>
+        </div>
+        <pre id="results" aria-live="polite" class="mt-4 min-h-[32rem] overflow-auto rounded-md border border-[#d6dfd8] bg-[#182b25] p-4 text-xs leading-6 text-[#e2eee6]">Choose an operation to inspect its results.</pre>
+      </section>
+    </main>
+    <script type="module" src="../dist/demo.js"></script>
+  </body>
+</html>

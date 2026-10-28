@@ -1,0 +1,14 @@
+{
+  "name": "nexova-candidate-utilities",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc",
+    "demo": "npm run build && npx http-server . -p 3000 -a 0.0.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
