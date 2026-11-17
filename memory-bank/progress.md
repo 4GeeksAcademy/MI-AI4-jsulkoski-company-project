@@ -7,12 +7,12 @@
 - The root `BRIEFING.md` now contains the company-specific milestone briefing. Its original source remains under `uis/talent-pipeline-tracker/nexova-BRIEFING.en.md`.
 - Initial agent context and operating guidance are established in this memory bank, root `AGENTS.md`, `.agents/rules/`, and `.agents/skills/`.
 - No new application or API is part of this infrastructure setup.
-- Infrastructure setup is committed on `feat/nexova-agent-infrastructure` as `4c73cdd` (`Add Nexova agent infrastructure context`).
+- Infrastructure setup is committed on `feature/agent-memory-bank` as `debca84` (`Add Nexova agent infrastructure context`).
 
 ## Next steps
 
-1. Push `feat/nexova-agent-infrastructure` to the user's fork and open a PR. The configured `upstream` remote currently returns GitHub HTTP 403 (`Permission to jsulkoski/company-project.git denied`), so publishing is blocked until repository permissions/authentication are corrected or a writable fork remote is configured.
-2. After PR creation, merge, or future architecture changes, update this progress file and relevant memory-bank context so future sessions start from the current state.
+1. Review PR #2 at https://github.com/4GeeksAcademy/MI-AI4-jsulkoski-company-project/pull/2 for approval and merge by the repository owner/maintainer.
+2. After merge or future architecture changes, update this progress file and relevant memory-bank context so future sessions start from the current state.
 
 ## Session update policy
 
