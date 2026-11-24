@@ -5,8 +5,11 @@ set -euo pipefail
 corepack enable || true
 corepack prepare pnpm@latest --activate || true
 
-python -m pip install --upgrade pip uv
-
-uv sync
+if [[ -f pyproject.toml ]]; then
+	python -m pip install --upgrade pip uv
+	uv sync
+else
+	echo "No root pyproject.toml found; skipping Python dependency sync."
+fi
 
 echo "Devcontainer setup complete."
